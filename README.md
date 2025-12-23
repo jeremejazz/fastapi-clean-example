@@ -1,7 +1,7 @@
 
 
 ```
-pip install fastapi uvicorn sqlalchemy pydantic
+pip install fastapi[standard] uvicorn sqlalchemy pydantic
 ```
 
 
