@@ -1,4 +1,4 @@
-# Fast API Clean Architecture Example
+# FastAPI Clean Architecture Example
 
 Simple clean architecture example implementation in FastAPI.
 
