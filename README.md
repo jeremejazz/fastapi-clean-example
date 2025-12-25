@@ -1,9 +1,16 @@
+# Fast API Clean Architecture Example
 
+Simple clean architecture example implementation in FastAPI.
+
+## Setup
+
+Assuming you are working on a virtual environment like [venv](https://docs.python.org/3/library/venv.html), install the dependencies:
 
 ```
-pip install fastapi[standard] sqlalchemy
+pip install -r requirements.txt
 ```
 
+## Directory Structure
 
 ```
 app/
