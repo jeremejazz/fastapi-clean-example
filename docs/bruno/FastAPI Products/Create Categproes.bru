@@ -1,0 +1,20 @@
+meta {
+  name: Create Categproes
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/categories
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {"name": "Beverages"}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
