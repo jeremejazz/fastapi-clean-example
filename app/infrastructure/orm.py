@@ -1,15 +1,16 @@
 
 from sqlalchemy import Column, ForeignKey, Integer, Numeric, String
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, MappedAsDataclass, Mapped, mapped_column
 
 from app.infrastructure.database import Base
 
 
-class CategoryORM(Base):
+class CategoryORM(MappedAsDataclass, Base):
     __tablename__ = "categories"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    name: Mapped[str]
+    # id = Column(Integer, primary_key=True, index=True)
+    # name = Column(String, unique=True, index=True)
                   
 
 class ProductORM(Base):
