@@ -27,3 +27,7 @@ class CategoryRepository(ABC):
     def get_by_id(self, category_id: int) -> Optional[Category]:
         pass
 
+    @abstractmethod
+    def get_by_name(self, name: str) -> Optional[Category]:
+        pass
+

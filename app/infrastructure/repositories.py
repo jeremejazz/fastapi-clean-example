@@ -11,10 +11,14 @@ class SQLAlchemyCategoryRepository(CategoryRepository):
         self.db = db
 
     def create(self, category: Category):
+
+        category_search = self.get_by_name(category.name)
+        if category_search:
+            raise ValueError(f"Category with name `{category.name}` already exists")
+
         category_orm = CategoryORM(name=category.name)
         self.db.add(category_orm)
         self.db.commit()
-        self.db.refresh()
 
         return Category(id=category_orm.id, name=category_orm.name)
     
@@ -24,6 +28,9 @@ class SQLAlchemyCategoryRepository(CategoryRepository):
         if category_orm:
             return Category(id=category_orm.id, name=category_orm.name)
         return None
+
+    def get_by_name(self, name):
+        return self.db.query(CategoryORM).filter(CategoryORM.name == name).first()
     
 
 class SqlAlchemyProductRepository(ProductRepository):
