@@ -20,6 +20,5 @@ class ProductORM(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(index=True)
     price:Mapped[Decimal] = mapped_column(Numeric(precision=10, scale=2, asdecimal=True))
-    # category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
-
+    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
     # category: Mapped[CategoryORM] = relationship(back_populates="products")
