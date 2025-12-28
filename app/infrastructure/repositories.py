@@ -43,31 +43,31 @@ class SqlAlchemyProductRepository(ProductRepository):
     def __init__(self, db: Session):
         self.db = db
 
-def create(self, product: Product) -> Product:
-        product_orm = ProductORM(
-            name=product.name, 
-            price=product.price, 
-            category_id=product.category_id
-        )
-        self.db.add(product_orm)
-        self.db.commit()
-        self.db.refresh(product_orm)
-        return Product(
-            id=product_orm.id, 
-            name=product_orm.name, 
-            price=product_orm.price, 
-            category_id=product_orm.category_id
-        )
+    def create(self, product: Product) -> Product:
+            product_orm = ProductORM(
+                name=product.name, 
+                price=product.price, 
+                category_id=product.category_id
+            )
+            self.db.add(product_orm)
+            self.db.commit()
+            self.db.refresh(product_orm)
+            return Product(
+                id=product_orm.id, 
+                name=product_orm.name, 
+                price=product_orm.price, 
+                category_id=product_orm.category_id
+            )
 
-def get_by_id(self, product_id: int) -> Optional[Product]:
-    product_orm: Optional[ProductORM] = self.db.query(ProductORM).filter(ProductORM.id == product_id).first()
-    if product_orm:
-        return Product(id=product_orm.id, name=product_orm.name, price=product_orm.price, category_id=product_orm.category_id)
-    return None
+    def get_by_id(self, product_id: int) -> Optional[Product]:
+        product_orm: Optional[ProductORM] = self.db.query(ProductORM).filter(ProductORM.id == product_id).first()
+        if product_orm:
+            return Product(id=product_orm.id, name=product_orm.name, price=product_orm.price, category_id=product_orm.category_id)
+        return None
 
-def list_all(self) -> List[Product]:
-    orms = self.db.query(ProductORM).all()
-    return [
-        Product(id=p.id, name=p.name, price=p.price, category_id=p.category_id) 
-        for p in orms
-    ]
+    def list_all(self) -> List[Product]:
+        orms = self.db.query(ProductORM).all()
+        return [
+            Product(id=p.id, name=p.name, price=p.price, category_id=p.category_id) 
+            for p in orms
+        ]
