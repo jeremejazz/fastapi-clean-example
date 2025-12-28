@@ -1,4 +1,4 @@
-from typing import Union
+from typing import List, Union
 
 from sqlalchemy.orm import Session
 from fastapi import Depends, FastAPI, HTTPException
@@ -57,5 +57,9 @@ def create_product(
         raise HTTPException(status_code=400, detail=str(e))
 
 
-
+@app.get("/products", response_model=List[ProductResponse])
+def list_products(
+    service: ProductService = Depends(get_product_service)
+):
+    return service.list_products()
  
