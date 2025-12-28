@@ -3,7 +3,7 @@ from typing import Union
 from sqlalchemy.orm import Session
 from fastapi import Depends, FastAPI, HTTPException
 
-from app.api.schemas import CategoryCreate, CategoryResponse
+from app.api.schemas import CategoryCreate, CategoryResponse, ProductCreate, ProductResponse
 from app.application.usecases.category_service import CategoryService
 from app.application.usecases.product_service import ProductService
 from app.domain.interfaces import CategoryRepository
@@ -39,4 +39,23 @@ def create_category(
     except ValueError as v:
 
         raise HTTPException(status_code=400, detail=f"Invalid name: {v}")
+
+@app.get("/categories")
+def get_categories(service: CategoryService = Depends(get_category_service)):
+
+    return service.list_categories()
+
+
+@app.post("/products", response_model=ProductResponse)
+def create_product(
+    product: ProductCreate,
+    service: ProductService = Depends(get_product_service)
+):
+    try:
+        return service.create_product(name=product.name, price=product.price, category_id=product.category_id)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+
  

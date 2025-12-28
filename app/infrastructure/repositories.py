@@ -31,6 +31,12 @@ class SQLAlchemyCategoryRepository(CategoryRepository):
 
     def get_by_name(self, name):
         return self.db.query(CategoryORM).filter(CategoryORM.name == name).first()
+
+    def list_all(self):
+        orms = self.db.query(CategoryORM).all()
+        return [Category(id=x.id, name=x.name) for x in orms]
+          
+        
     
 
 class SqlAlchemyProductRepository(ProductRepository):

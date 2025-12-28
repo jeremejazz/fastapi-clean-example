@@ -1,4 +1,5 @@
 
+from typing import List
 from app.domain.interfaces import CategoryRepository
 from app.domain.models import Category
 
@@ -13,3 +14,6 @@ class CategoryService:
     
     def get_category(self, category_id:int) -> Category:
         return self.repository.get_by_id(category_id)
+    
+    def list_categories(self) -> List[Category]:
+        return self.repository.list_all()
