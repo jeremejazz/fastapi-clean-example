@@ -9,7 +9,8 @@ class CategoryResponse(BaseModel):
     name: str
     
     class Config:
-        orm_mode = True
+        form_attributes = True
+
 
 class ProductCreate(BaseModel):
     name: str
