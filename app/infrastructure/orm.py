@@ -12,7 +12,9 @@ class CategoryORM(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True) 
     name: Mapped[str] = mapped_column(unique=True, index=True)
-                  
+    
+    products: Mapped[list["ProductORM"]] = relationship(back_populates="category")
+
 
 class ProductORM(Base):
     __tablename__ = "products"
@@ -21,4 +23,4 @@ class ProductORM(Base):
     name: Mapped[str] = mapped_column(index=True)
     price:Mapped[Decimal] = mapped_column(Numeric(precision=10, scale=2, asdecimal=True))
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
-    # category: Mapped[CategoryORM] = relationship(back_populates="products")
+    category: Mapped["CategoryORM"] = relationship(back_populates="products")
